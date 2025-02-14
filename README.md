@@ -1,2 +1,8 @@
-# NeonTweet
-A minimalist and fast Twitter with NeonDB.
+```
+npm install
+npm run dev
+```
+
+```
+npm run deploy
+```
