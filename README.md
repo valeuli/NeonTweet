@@ -27,7 +27,16 @@ cd neon-tweet
 npm install
 ```
 
-### 3️⃣ Configure `wrangler.toml`
+### 3️⃣ Authenticate with Cloudflare
+
+```sh
+npx wrangler login
+npx wrangler whoami
+```
+
+This step ensures your Cloudflare account is properly set up.
+
+### 4️⃣ Configure `wrangler.toml`
 
 Edit `wrangler.toml` and set your **database URL**:
 
