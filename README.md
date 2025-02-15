@@ -17,7 +17,7 @@ Neon Tweet is a **serverless API** built with **Cloudflare Workers**, **Cloudfla
 ### 1️⃣ Clone the repository
 
 ```sh
-git clone https://github.com/valeuli/neon-tweet.git
+git clone https://github.com/valeuli/NeonTweet.git
 cd neon-tweet
 ```
 
