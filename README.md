@@ -18,7 +18,7 @@ Neon Tweet is a **serverless API** built with **Cloudflare Workers**, **Cloudfla
 
 ```sh
 git clone https://github.com/valeuli/NeonTweet.git
-cd neon-tweet
+cd NeonTweet
 ```
 
 ### 2️⃣ Install dependencies
@@ -26,10 +26,32 @@ cd neon-tweet
 ```sh
 npm install
 ```
+---
+## 🛫 Configuring Cloudflare Queues
 
-### 3️⃣ Configure `wrangler.toml`
+**Before running the project, make sure Cloudflare Queues are set up correctly.**
 
-Edit `wrangler.toml` and set your **database URL**:
+### 1️⃣ Authenticate with Cloudflare
+```sh
+npx wrangler login
+npx wrangler whoami
+```
+
+### 2️⃣ Create the queue manually
+```sh
+npx wrangler queues create "<QUEUE_NAME>"
+```
+
+### 3️⃣ Verify the queue
+```sh
+npx wrangler queues list
+```
+
+If everything is correct, you should see `tweet-processing` in the list.
+
+### 4️⃣ Configure `wrangler.toml`
+
+Edit `wrangler.toml` and set your **database URL** and queue name:
 
 ```toml
 name = "neon-tweet"
@@ -37,14 +59,29 @@ main = "src/index.ts"
 compatibility_date = "2025-02-14"
 
 [vars]
-DATABASE_URL = "postgresql://your_neon_db_url"
+DATABASE_URL = "<NEON_DB_URL>"
 
 [[queues.producers]]
-queue = "tweet-processing"
+queue = "<QUEUE_NAME>"
 binding = "tweet_processing"
 
 [[queues.consumers]]
-queue = "tweet-processing"
+queue = "<QUEUE_NAME>"
+```
+---
+## 🔧 Database Setup
+Before running the project, you need to apply the database migrations:
+
+### 1️⃣ Create a .env file:
+Inside the project root, create a .env file and add your NeonDB URL:
+
+```sh
+DATABASE_URL="<NEON_DB_URL>"
+```
+### 2️⃣ Apply database migrations:
+
+```sh
+npx prisma migrate dev --name init
 ```
 
 ---
@@ -64,35 +101,6 @@ Starts a local Cloudflare Worker with `wrangler dev`.
 ```sh
 npm run deploy
 ```
-
----
-
-## 🛫 Configuring Cloudflare Queues
-
-**Before running the project, make sure Cloudflare Queues are set up correctly.**
-
-### 1️⃣ Authenticate with Cloudflare
-```sh
-npx wrangler login
-npx wrangler whoami
-```
-
-### 2️⃣ Create the queue manually
-```sh
-npx wrangler queues create tweet-processing
-```
-
-### 3️⃣ Link the queue to the worker
-```sh
-npx wrangler queues add-consumer tweet-processing --destination=neon-tweet
-```
-
-### 4️⃣ Verify the queue
-```sh
-npx wrangler queues list
-```
-
-If everything is correct, you should see `tweet-processing` in the list.
 
 ---
 
