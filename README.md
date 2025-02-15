@@ -17,7 +17,7 @@ Neon Tweet is a **serverless API** built with **Cloudflare Workers**, **Cloudfla
 ### 1️⃣ Clone the repository
 
 ```sh
-git clone https://github.com/your-username/neon-tweet.git
+git clone https://github.com/valeuli/neon-tweet.git
 cd neon-tweet
 ```
 
@@ -27,16 +27,7 @@ cd neon-tweet
 npm install
 ```
 
-### 3️⃣ Authenticate with Cloudflare
-
-```sh
-npx wrangler login
-npx wrangler whoami
-```
-
-This step ensures your Cloudflare account is properly set up.
-
-### 4️⃣ Configure `wrangler.toml`
+### 3️⃣ Configure `wrangler.toml`
 
 Edit `wrangler.toml` and set your **database URL**:
 
@@ -73,6 +64,35 @@ Starts a local Cloudflare Worker with `wrangler dev`.
 ```sh
 npm run deploy
 ```
+
+---
+
+## 🛫 Configuring Cloudflare Queues
+
+**Before running the project, make sure Cloudflare Queues are set up correctly.**
+
+### 1️⃣ Authenticate with Cloudflare
+```sh
+npx wrangler login
+npx wrangler whoami
+```
+
+### 2️⃣ Create the queue manually
+```sh
+npx wrangler queues create tweet-processing
+```
+
+### 3️⃣ Link the queue to the worker
+```sh
+npx wrangler queues add-consumer tweet-processing --destination=neon-tweet
+```
+
+### 4️⃣ Verify the queue
+```sh
+npx wrangler queues list
+```
+
+If everything is correct, you should see `tweet-processing` in the list.
 
 ---
 
