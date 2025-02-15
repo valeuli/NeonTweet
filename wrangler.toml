@@ -1,0 +1,16 @@
+name = "neon-tweet"
+main = "src/index.ts"
+compatibility_date = "2025-02-13"
+
+[vars]
+DATABASE_URL = "postgresql://your_neon_db_url"
+
+[[queues.producers]]
+queue = "tweet-processing"
+binding = "tweet_processing"
+
+[[queues.consumers]]
+queue = "tweet-processing"
+
+[dev]
+port = 8787

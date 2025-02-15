@@ -1,0 +1,21 @@
+{
+	"name": "neon-tweet",
+	"scripts": {
+		"dev": "wrangler dev",
+		"deploy": "wrangler deploy --minify",
+		"cf-typegen": "wrangler types --env-interface CloudflareBindings",
+		"test": "vitest"
+	},
+	"dependencies": {
+		"@prisma/adapter-neon": "^6.3.1",
+		"hono": "^4.7.1",
+		"prisma": "^6.3.1"
+	},
+	"devDependencies": {
+		"@cloudflare/workers-types": "^4.20250204.0",
+		"@prisma/client": "^6.3.1",
+		"vitest": "^3.0.5",
+		"vitest-mock-extended": "^2.0.2",
+		"wrangler": "^3.108.1"
+	}
+}
