@@ -47,7 +47,7 @@ npx wrangler queues create "<QUEUE_NAME>"
 npx wrangler queues list
 ```
 
-If everything is correct, you should see `tweet-processing` in the list.
+If everything is correct, you should see the queue in the list.
 
 ### 4️⃣ Configure `wrangler.toml`
 
